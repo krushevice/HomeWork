@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="mainScene" class="javafx.scene.Scene">
+    <constructor-arg ref="vBox"/>
+  </bean>
+  
+  <bean id="vBox" class="javafx.scene.layout.VBox">
+    <constructor-arg>
+      <list>
+        <ref bean="table"/>
+        <ref bean="hBox"/>
+      </list>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="table" class="by.KrushevskayaE.ui.NewTable" init-method="init" scope="singleton">
+    <property name="column" ref="column"/>
+  </bean>
+  
+  <bean id="column" class="by.KrushevskayaE.ui.NewColumn" init-method="init">
+    <constructor-arg type="String" value="What to do?"/>
+  </bean>
+  
+  <bean id="hBox" class="by.KrushevskayaE.ui.NewHBox" init-method="init">
+    <constructor-arg type="double" value="20"/>
+    <constructor-arg>
+	  <list>
+	    <ref bean="textField"/>
+	  	<ref bean="createButton"/>
+	    <ref bean="deleteButton"/>
+	  </list>
+	</constructor-arg>
+  </bean>
+  
+  <bean id="deleteButton" class="by.KrushevskayaE.ui.button.NewDeleteButton" init-method="init">
+	<constructor-arg type="String" value="Delete"/>
+	<property name="table" ref="table"/>
+  </bean>
+  
+  <bean id="createButton" class="by.KrushevskayaE.ui.button.NewCreateButton" init-method="init">
+	<constructor-arg type="String" value="Create"/>
+	<property name="table" ref="table"/>
+    <property name="textField" ref="textField"/>
+  </bean>
+    
+  <bean id="textField" class="by.KrushevskayaE.ui.NewTextField" init-method="init" />
+    
+</beans>
